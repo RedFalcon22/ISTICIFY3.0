@@ -1,0 +1,15 @@
+.schedule-container {
+    padding: 0 1rem;
+  }
+  
+  .subject-card {
+    border-radius: 5px;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .card {
+    border: none;
+    border-radius: 8px;
+  }
+  

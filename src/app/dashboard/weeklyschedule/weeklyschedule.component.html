@@ -1,0 +1,59 @@
+<div class="container-fluid schedule-container mt-4">
+  <!-- Desktop / Tablet View -->
+  <div class="table-responsive d-none d-sm-block">
+    <table class="table text-center align-middle schedule-table">
+      <thead class="table-dark">
+        <tr>
+          <th></th>
+          <th *ngFor="let day of days">{{ day }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let time of timeSlots">
+          <td class="fw-bold bg-light time-cell">{{ time }}</td>
+          <td *ngFor="let day of days" class="schedule-cell bg-body-tertiary">
+            <ng-container *ngIf="getSubject(day, time) as subject">
+              <div
+                class="subject-card"
+                [ngStyle]="{
+                  'background-color': subject.color,
+                  color: subject.txtcolor
+                }"
+              >
+                <div>
+                  <strong>{{ subject.name }}</strong
+                  ><br />
+                  <span class="classroom">Room: {{ subject.classroom }}</span>
+                </div>
+              </div>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Mobile View -->
+  <div class="d-block d-sm-none">
+    <div *ngFor="let day of days" class="mb-4">
+      <h5 class="text-primary fw-bold">{{ day }}</h5>
+      <div *ngFor="let time of timeSlots">
+        <ng-container *ngIf="getSubject(day, time) as subject">
+          <div
+            class="card mb-2"
+            [ngStyle]="{
+              'background-color': subject.color,
+              color: subject.txtcolor
+            }"
+          >
+            <div class="card-body p-2">
+              <h6 class="mb-1">{{ subject.name }}</h6>
+              <p class="mb-0 small">Time: {{ time }}</p>
+              <p class="mb-0 small">Room: {{ subject.classroom }}</p>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

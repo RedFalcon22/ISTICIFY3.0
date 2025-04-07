@@ -1,0 +1,59 @@
+<div class="app-container">
+  <div class="position-relative">
+    <app-sidebar
+      [isSidebarCollapsed]="isSidebarCollapsed"
+      (sidebarToggle)="onSidebarToggle()"
+    ></app-sidebar>
+
+    <button
+      class="sidebar-toggle-btn"
+      [ngClass]="{ 'sidebar-collapsed': isSidebarCollapsed }"
+      (click)="onSidebarToggle()"
+    >
+      <svg
+        *ngIf="isSidebarCollapsed"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="white"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M9 18l6-6-6-6v12z" />
+      </svg>
+      <svg
+        *ngIf="!isSidebarCollapsed"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="white"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M15 6l-6 6 6 6V6z" />
+      </svg>
+    </button>
+  </div>
+
+  <main class="content" [ngClass]="{ 'content-expanded': isSidebarCollapsed }">
+    <div class="row">
+      <div class="col">
+        <app-weeklyschedule></app-weeklyschedule>
+      </div>
+
+      <div class="col">
+        <app-subject-management
+          *ngFor="let subject of subjects"
+          [subjectTitle]="subject.title"
+        >
+        </app-subject-management>
+      </div>
+    </div>
+  </main>
+</div>

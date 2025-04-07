@@ -1,0 +1,79 @@
+
+
+
+
+.cards-container{
+    margin-top: 20px;
+    background-color: #d1d4f6;
+    box-shadow: #2c3e50;
+    border-radius: 20px;
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping of cards to the next row */
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    height: auto; /* Allow height to adjust dynamically */
+    padding: 20px;
+}
+
+.card {
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    width: 150px; /* Default width for larger screens */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+p {
+    margin: 10px 0 0;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Media query for devices with width less than 600px */
+@media (max-width: 600px) {
+    .card {
+        width: 120px; /* Decrease the width for smaller devices */
+    }
+
+    h2 {
+        font-size: 1.2rem; /* Adjust font size of heading */
+    }
+
+    p {
+        font-size: 1.5rem; /* Adjust font size of paragraph */
+    }
+}
+
+/* Media query for devices with width less than 400px */
+@media (max-width: 400px) {
+    .card {
+        width: 100px; /* Further decrease width for very small screens */
+    }
+
+    h2 {
+        font-size: 1rem; /* Reduce heading font size further */
+    }
+
+    p {
+        font-size: 1.2rem; /* Reduce paragraph font size further */
+    }
+}
+
+
+

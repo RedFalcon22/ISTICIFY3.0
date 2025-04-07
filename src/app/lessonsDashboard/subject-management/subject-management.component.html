@@ -1,0 +1,16 @@
+<div class="subject-management-container">
+  <div *ngIf="subjectDetails">
+    <h2>{{ subjectDetails.name }} - Subject Management</h2>
+    <p>{{ subjectDetails.description }}</p>
+    <div
+      [ngStyle]="{ backgroundColor: subjectDetails.color }"
+      class="subject-card"
+    >
+      <p><strong>Color: </strong>{{ subjectDetails.color }}</p>
+      <!-- Add more information or components related to the subject here -->
+    </div>
+  </div>
+  <div *ngIf="!subjectDetails">
+    <p>Loading or Subject not found...</p>
+  </div>
+</div>

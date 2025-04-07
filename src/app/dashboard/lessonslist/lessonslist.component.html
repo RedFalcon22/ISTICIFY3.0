@@ -1,0 +1,15 @@
+<div class="subjects-container">
+  <div
+    *ngFor="let subject of subjects"
+    class="subject-card"
+    [style.background-color]="subject.color"
+    [style.color]="subject.txtcolor"
+  >
+    <h3>{{ subject.name }}</h3>
+    <a [routerLink]="['/lessons/subject', subject.name]" [state]="subject">
+      <button class="manage-btn">
+        <span class="btn-txt">Manage</span>
+      </button>
+    </a>
+  </div>
+</div>

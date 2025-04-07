@@ -1,0 +1,25 @@
+<div class="calendar-container">
+  <div class="calendar-header">
+    <button (click)="prevMonth()">&lt;</button>
+    <span>{{ months[currentMonth] }} {{ currentYear }}</span>
+    <button (click)="nextMonth()">&gt;</button>
+  </div>
+
+  <div class="calendar-grid">
+    <div
+      class="day-name"
+      *ngFor="let day of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']"
+    >
+      {{ day }}
+    </div>
+
+    <div
+      *ngFor="let day of daysInMonth"
+      class="calendar-day"
+      [class.empty]="day === 0"
+      [ngClass]="{ today: isToday(day) }"
+    >
+      {{ day !== 0 ? day : "" }}
+    </div>
+  </div>
+</div>
