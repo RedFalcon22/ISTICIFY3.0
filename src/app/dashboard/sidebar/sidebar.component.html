@@ -1,14 +1,20 @@
 <div class="sidebar" [ngClass]="{ 'sidebar-collapsed': isSidebarCollapsed }">
-  <div class="sidebar-header" style="padding-top: 60px">
-    <a href="#" class="sidebar-logo">
-      {{ isSidebarCollapsed ? "I" : "Isticify" }}
+  <div class="sidebar-header" style="padding-top: 4rem">
+    <a  class="sidebar-logo">
+      <img 
+        *ngIf="!isSidebarCollapsed" 
+        src="logo1.png" 
+        alt="ISTIC Logo" 
+        style="height: 40px; width: auto;" 
+      />
+      <span *ngIf="isSidebarCollapsed">I</span>
     </a>
   </div>
 
   <!-- User profile section -->
   <div class="sidebar-profile">
     <div class="user-image">
-      <img [src]="user.profilePic" alt="User" />
+      <img src="profile.png" alt="User" />
     </div>
     <div class="user-name" *ngIf="!isSidebarCollapsed">
       {{ user.name }}
@@ -56,7 +62,7 @@
               />
             </svg>
           </span>
-          <span class="sidebar-item-text">Lessons</span>
+          <span class="sidebar-item-text">Matières</span>
           <!-- Arrow icon stays visible even when collapsed -->
           <i class="sidebar-item-arrow" [ngClass]="{ rotated: showLessons }"
             >&#x25BC;</i
@@ -103,7 +109,7 @@
               />
             </svg>
           </span>
-          <span class="sidebar-item-text">Homework</span>
+          <span class="sidebar-item-text">Quiz</span>
         </a>
       </li>
 
@@ -124,7 +130,7 @@
               />
             </svg>
           </span>
-          <span class="sidebar-item-text">Classes</span>
+          <span class="sidebar-item-text">Planning Salles</span>
         </a>
       </li>
 
@@ -166,7 +172,7 @@
               />
             </svg>
           </span>
-          <span class="sidebar-item-text">Moyennes</span>
+          <span class="sidebar-item-text">Dm rattrapage</span>
         </a>
       </li>
 

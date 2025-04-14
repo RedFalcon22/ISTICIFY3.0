@@ -1,8 +1,9 @@
-<div class="container-fluid schedule-container mt-4">
+<div class="container-fluid schedule-container p-4 bg-light mt-5 rounded-4">
   <!-- Desktop / Tablet View -->
   <div class="table-responsive d-none d-sm-block">
-    <table class="table text-center align-middle schedule-table">
-      <thead class="table-dark">
+    <table class="table text-center align-middle schedule-table" 
+    style=" border-collapse: separate;border-spacing: 0;border-radius: 15px; overflow: hidden;">
+      <thead class="table-secondary">
         <tr>
           <th></th>
           <th *ngFor="let day of days">{{ day }}</th>

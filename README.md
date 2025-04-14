@@ -1,21 +1,6 @@
-<<<<<<< HEAD
-# App2
+# StudentWeb
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.6.
-=======
-# Isticify2.0
-project in collaboration with our university (istic tunisia)
-
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.5.
-
-## Downloading and accessing the repo
-
-```bash
-git clone https://github.com/RedFalcon22/angularProject.git
-cd angularProject
-```
-
->>>>>>> d280385031cef73fc6ea6bc2a3ad1e15fb3692be
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.2.
 
 ## Development server
 
@@ -72,4 +57,3 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-"# ISTICIFY3.0" 

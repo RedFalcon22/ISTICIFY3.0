@@ -1,0 +1,59 @@
+<div class="container-fluid p-4 vh-100 d-flex align-items-center justify-content-center"
+    style="background-color: rgb(16, 58, 125);">
+    <!--section d'authentification-->
+    <div class="container-fluid col-12 rounded-4 h-100 shadow-lg bg-light">
+        <div class="row h-100">
+            <a routerLink="/Bienvenue" class="position-absolute top-0 start-0 p-5">
+                <i class="bi bi-house-door-fill fs-3 text-primary"></i>
+            </a>
+            <div class="col-6 p-4 d-flex flex-column justify-content-center">
+                <div class="row">
+                    <div class="col mb-5">
+                        <h1 class="text-primary text-center fw-bold">Connexion</h1>
+                    </div>
+                </div>
+                <div class="text-end px-4 mb-3">Besoin d'un compte? <a routerLink="/Sinscrire" class="link-secondary">S'inscrire</a></div>
+                <div class="input-group px-4">
+                    <span class="input-group-text bg-dark text-light">
+                        <i class="bi bi-person fs-5"></i>
+                    </span>
+                    <input type="text" class="form-control" placeholder="Code CIN" id="CIN">
+                </div>
+                <div class="input-group p-4">
+                    <span class="input-group-text bg-dark text-light">
+                        <i class="bi bi-lock fs-5"></i>
+                    </span>
+                    <input type="password" class="form-control" placeholder="Mot de passe" id="password">
+                </div>
+                <div class="text-center"><a href="#" class="link-secondary" routerLink="/Contact">Mot de passe
+                        oublié ?</a></div>
+                <div class="row mt-2 p-4">
+                    <div class="col-6 col-lg-8 mt-2 ">
+                        <div class="form-check">
+                            <input type="checkbox" id="rememberMe" class="form-check-input" onchange="rememberMe()">
+                            <label for="rememberMe" class="form-check-label">Se souvenir de moi</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-4 d-grid   ">
+                        <button class="btn btn-warning mt-2 btn-lg rounded-5" onclick="login()" routerLink="/Dashboard">Se
+                            connecter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 p-0 position-relative">
+                <video autoplay loop muted src="bg.mp4" type="video/mp4" class="bg-videocol"></video>
+                <div class="video-overlay">
+                    <h2 class="text-light fw-bold">Nos Services</h2>
+                    <div class="text-light text-center">
+                        <i class="bi bi-laptop fs-1"></i>
+                        <p>Revue quotidienne des cours, quiz, examens...</p>
+                        <i class="bi bi-chat-dots fs-1"></i>
+                        <p>Interagir avec vos étudiants, administration</p>
+                        <i class="bi bi-clock fs-1"></i>
+                        <p>Consulter les plans et les emplois du temps</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
