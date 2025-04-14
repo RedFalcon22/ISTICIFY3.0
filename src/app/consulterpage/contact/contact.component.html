@@ -1,0 +1,107 @@
+
+<div class="container-fluid vh-100 vw-100 position-relative overflow-x-hidden p-5">
+    <video autoplay loop muted playsinline preload="auto" src="bg.mp4" type="video/mp4" class="bg-video"></video>
+    <div class="row col-7 mx-auto p-4 mb-5">
+        <nav class="navbar navbar-expand-lg bg-transparent">
+            <div class="container-fluid mt-5">
+                <a class="navbar-brand p-4 text-light"><img src="logo1.png" style="height: 50px;" alt="ISTIC"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav nav-underline">
+                        <li class="nav-item">
+                            <a class="nav-link ms-4 text-light fs-3" routerLink="/Bienvenue">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link ms-4 text-light fs-3" routerLink="/Apropos">À&nbsp;propos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active ms-4 text-light fs-3" routerLink="/Contact">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="ms-4" routerLink="/Sinscrire"><button
+                                    class="btn btn-outline-warning btn-lg rounded-5">S'inscrire</button></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="d-flex justify-content-center align-items-center mt-2 ">
+        <div *ngIf="display == 0" class="d-grid gap-4 col-7 col-md-5 mx-auto">
+            <button class="btn btn-light btn-lg rounded-5" type="button" (click)="display=1">reporter un problème</button>
+            <button class="btn btn-light btn-lg rounded-5" type="button" (click)="display=1">proposer une recommandation</button>
+            <button class="btn btn-light btn-lg rounded-5" type="button" (click)="display=2">mot de passe oublier</button>
+            <button class="btn btn-light btn-lg rounded-5" type="button" (click)="display=3">changer l'adresse email</button>
+        </div>
+        <div *ngIf="display == 1" class="form col-6 mx-auto mb-3 ">
+            <h4 class="text-light text-center mb-4">N'hésitez pas à nous contacter pour toute question ou suggestion.</h4>
+            <form>
+                <div class="mb-3">
+                    <label for="name" class="form-label text-light"><h5>Nom</h5></label>
+                    <input type="text" class="form-control" id="name" placeholder="Votre nom">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label text-light"><h5>Email</h5></label>
+                    <input type="email" class="form-control" id="email" placeholder="Votre email">
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label text-light"><h5>Message</h5></label>
+                    <textarea class="form-control" id="message" rows="2" placeholder="Votre message"></textarea>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-warning btn-lg rounded-4 col-4 mx-auto mt-2" (click)="display=0">Envoyer</button>
+                </div>
+            </form>
+            <br>
+        </div>
+        <div *ngIf="display == 2" class="form col-5 mx-auto mb-3">
+            <h4 class="text-light text-center mb-4">Réinitialiser le mot de passe</h4>
+            <form>
+                <div class="mb-3">
+                    <label for="cin" class="form-label text-light"><h5>Code CIN</h5></label>
+                    <input type="text" class="form-control" id="cin" placeholder="Votre CIN" required minlength="8" maxlength="8">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label text-light"><h5>Email</h5></label>
+                    <input type="email" class="form-control" id="email" placeholder="Votre email">
+                </div>
+                <div class="mb-3">
+                    <label for="newPassword" class="form-label text-light"><h5>Nouveau mot de passe</h5></label>
+                    <input type="password" class="form-control" id="newPassword" placeholder="Votre nouveau mot de passe" required minlength="8">
+                </div>
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label text-light"><h5>Confirmation du mot de passe</h5></label>
+                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirmer mot de passe" required minlength="8">
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-warning btn-lg rounded-4 col-4 mx-auto mt-2" (click)="display=0">Envoyer</button>
+                </div>
+            </form>
+            <br>
+        </div>
+        <div *ngIf="display == 3" class="form col-5 mx-auto">
+            <h4 class="text-light text-center mb-4">Réinitialiser l'adresse email</h4>
+            <form>
+                <div class="mb-3">
+                    <label for="cin" class="form-label text-light"><h5>Code CIN</h5></label>
+                    <input type="text" class="form-control" id="cin" placeholder="Votre CIN" required minlength="8" maxlength="8">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label text-light"><h5>Mot de passe</h5></label>
+                    <input type="password" class="form-control" id="password" placeholder="Votre mot de passe" required minlength="8">
+                </div>
+                <div class="mb-3">
+                    <label for="newEmail" class="form-label text-light"><h5>Nouveau email</h5></label>
+                    <input type="email" class="form-control" id="newEmail" placeholder="Votre nouveau email" required>
+                </div>
+                <div class="d-grid mb-3">
+                    <button type="submit" class="btn btn-warning btn-lg rounded-4 col-4 mx-auto mt-2" (click)="display=0">Envoyer</button>
+                </div>
+            </form>
+            <br>
+        </div>
+    </div>
+</div>

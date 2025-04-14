@@ -1,0 +1,39 @@
+<div class="container-fluid vh-100 position-relative p-5">
+  <video autoplay loop muted playsinline preload="auto" src="bg.mp4" type="video/mp4" class="bg-video"></video>
+  <div class="row col-7 mx-auto p-4">
+    <nav class="navbar navbar-expand-lg bg-transparent">
+        <div class="container-fluid mt-5">
+            <a class="navbar-brand p-4 text-light"><img src="logo1.png" style="height: 50px;" alt="ISTIC"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav nav-underline">
+                    <li class="nav-item">
+                        <a class="nav-link ms-4 active text-light fs-3" routerLink="/Bienvenue">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link ms-4  text-light fs-3" routerLink="/Apropos">À&nbsp;propos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  ms-4 text-light fs-3" routerLink="/Contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="ms-4" routerLink="/Sinscrire"><button
+                                class="btn btn-outline-warning btn-lg rounded-5">S'inscrire</button></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+  </div>
+  <div class="text-center mt-5">
+    <h1 class="text-light fw-bold">ISTIC</h1>
+    <h5 class="text-light mt-2">Bienvenue sur ISTIC, la plateforme qui simplifie votre expérience universitaire.</h5>
+    <h5 class="text-light text-center">Cliquez ci-dessous pour vous connecter</h5>
+    <button class="btn btn-warning btn-lg rounded-5 mt-2" routerLink="/Seconnecter">Commencer</button>
+  </div>
+  
+</div>
+
