@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { WeeklyscheduleComponent } from '../../dashboard/weeklyschedule/weeklyschedule.component';
-import { SidebarComponent } from '../sidebar/sidebar.component';
-import { SubjectManagementComponent } from '../subject-management/subject-management.component';
+import { SidebarComponent } from '../../dashboard/sidebar/sidebar.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-lessondashboard',
@@ -11,7 +11,7 @@ import { SubjectManagementComponent } from '../subject-management/subject-manage
     CommonModule, 
     WeeklyscheduleComponent, 
     SidebarComponent, 
-    SubjectManagementComponent
+    RouterModule
   ],
   templateUrl: './lessondashboard.component.html',
   styleUrls: ['./lessondashboard.component.css']

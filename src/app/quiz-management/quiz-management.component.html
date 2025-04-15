@@ -1,0 +1,124 @@
+<div class="app-container">
+  <div class="position-relative">
+    <app-sidebar
+      [isSidebarCollapsed]="isSidebarCollapsed"
+      (sidebarToggle)="onSidebarToggle()"
+    ></app-sidebar>
+
+    <button
+      class="sidebar-toggle-btn"
+      [ngClass]="{ 'sidebar-collapsed': isSidebarCollapsed }"
+      (click)="onSidebarToggle()"
+    >
+      <svg
+        *ngIf="isSidebarCollapsed"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="white"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M9 18l6-6-6-6v12z" />
+      </svg>
+      <svg
+        *ngIf="!isSidebarCollapsed"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="white"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M15 6l-6 6 6 6V6z" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- quiz-management.component.html -->
+  <div class="quiz-management-container">
+    <div class="header">
+      <h2>{{ subjectId }} Quizzes</h2>
+      <button (click)="toggleAddForm()">Add Quiz</button>
+    </div>
+
+    <div *ngIf="showAddForm" class="add-form">
+      <h3>Add New Quiz</h3>
+      <form (submit)="addQuiz()">
+        <label for="title">Title:</label>
+        <input id="title" [(ngModel)]="newQuiz.title" name="title" required />
+
+        <label for="date">Date:</label>
+        <input
+          id="date"
+          type="date"
+          [(ngModel)]="newQuiz.date"
+          name="date"
+          required
+        />
+
+        <div *ngFor="let question of newQuiz.questions; let i = index">
+          <label for="question">Question {{ i + 1 }}:</label>
+          <input
+            id="question"
+            [(ngModel)]="question.question"
+            name="question{{ i }}"
+            required
+          />
+
+          <div *ngFor="let choiceKey of ['a', 'b', 'c']">
+            <label for="choice{{ choiceKey }}"
+              >Choice {{ choiceKey.toUpperCase() }}:</label
+            >
+            <input
+              id="choice{{ choiceKey }}"
+              [(ngModel)]="question.choices[choiceKey]"
+              name="choice{{ choiceKey }}{{ i }}"
+              required
+            />
+          </div>
+
+          <label for="right">Right Answers:</label>
+          <input
+            id="right"
+            [(ngModel)]="question.right"
+            name="right{{ i }}"
+            required
+          />
+        </div>
+
+        <button type="submit">Add Quiz</button>
+      </form>
+    </div>
+
+    <div class="filters">
+      <label for="filter">Filter By:</label>
+      <select id="filter" [(ngModel)]="filter" (change)="sortQuizzes()">
+        <option value="date">Date</option>
+        <option value="alphabetic">Alphabetical</option>
+      </select>
+
+      <label for="sortOrder">Sort Order:</label>
+      <select id="sortOrder" [(ngModel)]="sortOrder" (change)="sortQuizzes()">
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+    </div>
+
+    <div class="quiz-list">
+      <div *ngFor="let quiz of quizzes">
+        <div class="quiz-item">
+          <h3>{{ quiz.title }}</h3>
+          <p>{{ quiz.date | date : "shortDate" }}</p>
+          <button (click)="deleteQuiz(quiz.id)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

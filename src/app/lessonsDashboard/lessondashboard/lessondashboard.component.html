@@ -48,11 +48,14 @@
       </div>
 
       <div class="col">
-        <app-subject-management
-          *ngFor="let subject of subjects"
-          [subjectTitle]="subject.title"
-        >
-        </app-subject-management>
+        <div *ngFor="let subject of subjects">
+          <a
+            class="btn btn-outline-primary d-block mb-2"
+            [routerLink]="['/lessons/subject', subject.title.toLowerCase()]"
+          >
+            Go to {{ subject.title }}
+          </a>
+        </div>
       </div>
     </div>
   </main>
