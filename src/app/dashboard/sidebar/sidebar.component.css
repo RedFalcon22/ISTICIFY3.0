@@ -1,85 +1,118 @@
 .sidebar {
-    background-color: #9c73f4;
+    background-color: #1a4b8c;
     color: #ecf0f1;
-    height: 100vh;
+    height: 96vh;
+    font-weight: 500;
+    font-size: 1.25rem;
     width: 250px;
     position: fixed;
     top: 0;
-    left: 0;
+    left: 1rem;
     z-index: 1000;
     transition: all 0.3s ease-in-out;
     overflow-x: hidden;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .sidebar-collapsed {
+    border-radius: 20px;
+    margin-top: 1%;
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+.sidebar::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+}
+
+/* Show scrollbar when scrolling */
+.sidebar:hover {
+    scrollbar-width: thin; /* For Firefox */
+}
+
+.sidebar:hover::-webkit-scrollbar {
+    display: block; /* For Chrome, Safari, and Opera */
+    width: 8px; /* Adjust the width of the scrollbar */
+}
+
+.sidebar:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2); /* Customize scrollbar thumb color */
+    border-radius: 4px; /* Rounded corners for the scrollbar thumb */
+}
+
+.sidebar-collapsed {
     width: 50px;
-  }
-  
-  .sidebar-collapsed .sidebar-item-text,
-  .sidebar-collapsed .user-name,
-  .sidebar-collapsed .sidebar-submenu {
+}
+
+.sidebar-collapsed .sidebar-item-text,
+.sidebar-collapsed .user-name,
+.sidebar-collapsed .sidebar-submenu {
     display: none;
-  }
-  
-  .sidebar-header {
+}
+
+.sidebar-header {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 1.5rem;
-  }
-  
-  .sidebar-logo {
+}
+
+.sidebar-logo {
     color: #fff;
     text-decoration: none;
     font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
-  }
-  
-  /* Profile Section */
-  .sidebar-profile {
+}
+
+/* Profile Section */
+.sidebar-profile {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 1rem;
     text-align: center;
-  }
-  
-  .user-image {
-    width: 40px;
-    height: 40px;
+}
+
+.user-image {
+    width: 35%;
+    height: 30%;
     border-radius: 50%;
     overflow: hidden;
-  }
-  
-  .user-image img {
+}
+
+.user-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-  
-  .user-name {
-    margin-top: 0.5rem;
-    font-size: 0.9rem;
-  }
-  
-  /* Sidebar Menu */
-  .sidebar-menu {
+}
+
+.user-name {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1c71c5;
+    background-color:aliceblue; /* Couleur de fond du bouton */
+    padding: 0.5rem 1rem; /* Espacement interne pour ressembler à un bouton */
+    border: none; /* Supprime les bordures */
+    border-radius: 10px; /* Coins arrondis */
+    text-align: center;
+    width: 100%; /* Make the button take the full width of its container */
+    max-width: 200px; /* Optional: set a max width */
+}
+/* Sidebar Menu */
+.sidebar-menu {
     padding: 1rem 0;
-  }
-  
-  .sidebar-menu ul {
+}
+
+.sidebar-menu ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
-  }
-  
-  .sidebar-menu-item {
+}
+
+.sidebar-menu-item {
     position: relative;
-  }
-  
-  .sidebar-item {
+}
+
+.sidebar-item {
     display: flex;
     align-items: center;
     color: #ecf0f1;
@@ -87,52 +120,53 @@
     padding: 0.75rem 1rem;
     transition: all 0.2s ease;
     cursor: pointer;
-  }
-  
-  .sidebar-item:hover {
+}
+
+.sidebar-item:hover {
     background-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  .sidebar-icon {
+}
+
+.sidebar-icon {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 24px;
     height: 24px;
     margin-right: 12px;
-  }
-  
-  .sidebar-collapsed .sidebar-icon {
+}
+
+.sidebar-collapsed .sidebar-icon {
     margin-right: 0;
-  }
-  
-  .sidebar-item-text {
+}
+
+.sidebar-item-text {
     margin-left: 10px;
     white-space: nowrap;
     transition: opacity 0.3s ease-in-out;
-  }
-  
-  /* Submenu */
-  .sidebar-submenu {
-    background-color: rgba(203, 198, 255, 0.1);
+}
+
+/* Submenu */
+.sidebar-submenu {
+    background-color: rgba(16, 7, 119, 0.384);
     padding-left: 1rem;
-  }
-  
-  .sidebar-submenu .sidebar-item {
+    
+}
+
+.sidebar-submenu .sidebar-item {
     padding-left: 2.5rem;
     font-size: 0.9rem;
-  }
-  
-  /* Arrow for toggling submenu */
-  .sidebar-item-arrow {
+}
+
+/* Arrow for toggling submenu */
+.sidebar-item-arrow {
     margin-left: auto;
     font-size: 0.8rem;
     transition: transform 0.5s ease;
-  }
-  
-  .sidebar-item-arrow.rotated {
+}
+
+.sidebar-item-arrow.rotated {
     transform: rotate(180deg);
-  }
-  .sidebar-collapsed .sidebar-item-arrow {
+}
+.sidebar-collapsed .sidebar-item-arrow {
     display: none;
-  }
+}

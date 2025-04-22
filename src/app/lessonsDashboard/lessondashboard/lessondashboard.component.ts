@@ -3,16 +3,21 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WeeklyscheduleComponent } from '../../dashboard/weeklyschedule/weeklyschedule.component';
 import { SidebarComponent } from '../../dashboard/sidebar/sidebar.component';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+
+
+
 
 @Component({
   selector: 'app-lessondashboard',
   imports: [
-    CommonModule, 
-    WeeklyscheduleComponent, 
-    SidebarComponent, 
-    RouterModule
-  ],
+    CommonModule,
+    WeeklyscheduleComponent,
+    SidebarComponent,
+    FormsModule,
+    RouterModule,
+],
   templateUrl: './lessondashboard.component.html',
   styleUrls: ['./lessondashboard.component.css']
 })

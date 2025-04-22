@@ -1,0 +1,41 @@
+<br>
+<div class="container-fluid  vh-100 position-relative d-flex align-items-center justify-content-center">
+    <video autoplay loop muted playsinline preload="auto" src="bg.mp4" type="video/mp4" class="bg-video"></video>
+    
+    <div class="col-6 col-lg-4 bg-light rounded-4 shadow-lg p-3">
+        <a routerLink="/Bienvenue" class="position-absolute">
+            <i class="bi bi-house-door-fill fs-3 text-primary"></i>
+        </a>
+        <h1 class="mb-4 text-center text-primary fw-bold mt-5 mb-5">Créer un compte</h1>
+        <form>
+            <!-- Nom -->
+            <div class="m-3 px-3">
+                <label for="name" class="form-label text-dark"><h4>CIN</h4></label>
+                <input type="text" id="name" class="form-control"  />
+            </div>
+            <div class="m-3 px-3">
+                <label for="email" class="form-label text-dark"><h4>Email</h4></label>
+                <input type="email" id="email" class="form-control" />
+            </div>
+
+            <!-- Mot de passe -->
+            <div class="m-3 px-3">
+                <label for="password" class="form-label text-dark"><H4>Mot de passe</H4></label>
+                <input type="password" id="password" class="form-control" />
+
+            </div>
+
+            <div class="m-3 px-3">
+                <label for="confirmPassword" class="form-label text-dark"><H4>Confirmer le mot de passe</H4></label>
+                <input type="password" id="confirmPassword" class="form-control" />
+            </div>
+
+            <!-- Bouton d'inscription -->
+            <div class="d-grid">
+                <button type="submit" class="btn btn-warning btn-lg rounded-4  col-6 mx-auto mt-2 mb-4" routerLink="/Bienvenue" >S'inscrire</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+<br>

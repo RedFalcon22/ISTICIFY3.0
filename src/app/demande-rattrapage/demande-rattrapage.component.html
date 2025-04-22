@@ -1,0 +1,63 @@
+<div class="app-container">
+
+    <div class="position-fixed">
+        <app-sidebar [isSidebarCollapsed]="isSidebarCollapsed" (sidebarToggle)="onSidebarToggle()"></app-sidebar>
+
+        <button class="sidebar-toggle-btn" [ngClass]="{ 'sidebar-collapsed': isSidebarCollapsed }"
+            (click)="onSidebarToggle()">
+            <svg *ngIf="isSidebarCollapsed" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6v12z" />
+            </svg>
+            <svg *ngIf="!isSidebarCollapsed" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M15 6l-6 6 6 6V6z" />
+            </svg>
+        </button>
+    </div>
+    <main class="content" [ngClass]="{ 'content-expanded': isSidebarCollapsed }">
+        <div class="container">
+            <h1>Demande de Rattrapage </h1>
+
+            <form [formGroup]="demandeForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="nomProfesseur">Nom complet</label>
+                    <input id="nomProfesseur" formControlName="nomProfesseur" type="text" class="form-control" />
+                    <div *ngIf="nomProfesseur?.invalid && nomProfesseur?.touched" class="error-message">
+                        Le nom du professeur est requis.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="matiere">Matière</label>
+                    <input id="matiere" formControlName="matiere" type="text" class="form-control" />
+                    <div *ngIf="matiere?.invalid && matiere?.touched" class="error-message">
+                        La matière est requise.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dateExamen">Date</label>
+                    <input id="dateExamen" formControlName="dateExamen" type="date" class="form-control" />
+                    <div *ngIf="dateExamen?.invalid && dateExamen?.touched" class="error-message">
+                        La date de l'examen est requise.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="raison">Raison</label>
+                    <textarea id="raison" formControlName="raison" class="form-control"></textarea>
+                    <div *ngIf="raison?.invalid && raison?.touched" class="error-message">
+                        La raison est requise et doit comporter au moins 10 caractères.
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" [disabled]="demandeForm.invalid">Envoyer la
+                    demande</button>
+            </form>
+        </div>
+    </main>
+</div>
+<app-messagerie></app-messagerie>

@@ -1,0 +1,147 @@
+<div class="app-container">
+    <div class="row">
+        <div class="position-fixed">
+            <app-sidebar
+              [isSidebarCollapsed]="isSidebarCollapsed"
+              (sidebarToggle)="onSidebarToggle()"
+            ></app-sidebar>
+        
+            <button
+              class="sidebar-toggle-btn"
+              [ngClass]="{ 'sidebar-collapsed': isSidebarCollapsed }"
+              (click)="onSidebarToggle()"
+            >
+              <svg
+                *ngIf="isSidebarCollapsed"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="white"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M9 18l6-6-6-6v12z" />
+              </svg>
+              <svg
+                *ngIf="!isSidebarCollapsed"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="white"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M15 6l-6 6 6 6V6z" />
+              </svg>
+            </button>
+       </div>
+       <main class="content col" [ngClass]="{ 'content-expanded': isSidebarCollapsed }">
+            <div class="quiz-container p-5">
+                <div class="quiz-header">
+                  <h2>Quiz - id: {{subjectId}}</h2>
+                  <button class="btn btn-primary mx-5" (click)="toggleAddForm()">
+                    {{ showAddForm ? 'Annuler' : '+ Nouveau Quiz' }}
+                  </button>
+                </div>
+              
+                <!-- Add Quiz Form -->
+                <div *ngIf="showAddForm" class="quiz-form">
+                  <h3>Création de quiz</h3>
+                  
+                  <div class="form-group">
+                    <label>Titre:</label>
+                    <input type="text" [(ngModel)]="newQuiz.title" required>
+                  </div>
+              
+                  <div class="form-group">
+                    <label>Date:</label>
+                    <input type="date" [(ngModel)]="newQuiz.date">
+                  </div>
+              
+                  <div class="questions-list">
+                    <div *ngFor="let question of newQuiz.questions; let i = index" class="question-block">
+                      <div class="question-header">
+                        <h4>Question {{i + 1}}</h4>
+                        <button *ngIf="newQuiz.questions.length > 1" (click)="removeQuestion(i)" class="btn btn-sm btn-danger">
+                          × Supprimer
+                        </button>
+                      </div>
+              
+                      <div class="form-group">
+                        <textarea [(ngModel)]="question.question" placeholder="Énoncé de la question" required></textarea>
+                      </div>
+              
+                      <div class="choices-list">
+                        <div *ngFor="let choiceKey of ['a', 'b', 'c']" class="choice-item">
+                          <label>
+                            <input type="checkbox" 
+                                   [checked]="isRightAnswer(choiceKey)"
+                                   (change)="toggleRightAnswer(choiceKey)">
+                            Option {{choiceKey.toUpperCase()}}:
+                          </label>
+                          <input type="text" 
+                                 [(ngModel)]="question.choices[choiceKey]" 
+                                 placeholder="Réponse" 
+                                 required>
+                        </div>
+                      </div>
+                    </div>
+              
+                    <button (click)="addQuestion()" class="btn btn-add-question">
+                      + Ajouter une question
+                    </button>
+                  </div>
+              
+                  <div class="form-actions">
+                    <button (click)="resetForm()" type="button" class="btn btn-secondary">
+                      Réinitialiser
+                    </button>
+                    <button (click)="addQuiz()" class="btn btn-primary" [disabled]="!validateQuiz()">
+                      Confirmer
+                    </button>
+                  </div>
+                </div>
+              
+                <!-- Quiz List -->
+                <div class="quiz-controls">
+                  <div class="filter-group">
+                    <label>Trier par:</label>
+                    <select [(ngModel)]="filter" (change)="sortQuizzes()">
+                      <option value="date">Date</option>
+                      <option value="alphabetic">A-Z</option>
+                    </select>
+                  </div>
+              
+                  <div class="sort-group">
+                    <label>Ordre:</label>
+                    <select [(ngModel)]="sortOrder" (change)="sortQuizzes()">
+                      <option value="asc">Croissant</option>
+                      <option value="desc">Décroissant</option>
+                    </select>
+                  </div>
+                </div>
+              
+                <div class="quiz-list">
+                  <div *ngFor="let quiz of quizzes" class="quiz-card">
+                    <div class="quiz-info">
+                      <h3>{{quiz.title}}</h3>
+                      <p class="quiz-date">{{quiz.date | date:'dd/MM/yyyy'}}</p>
+                      <p class="quiz-meta">{{quiz.questions.length}} question(s)</p>
+                    </div>
+                    <div class="quiz-actions">
+                      <button class="btn btn-sm btn-info">Voir</button>
+                      <button (click)="deleteQuiz(quiz.id)" class="btn btn-sm btn-danger">Supprimer</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+       </main>
+    </div>
+</div>
+<app-messagerie></app-messagerie>

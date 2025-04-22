@@ -1,0 +1,86 @@
+
+<div class="app-container">
+      <div class="position-fixed">
+          <app-sidebar
+            [isSidebarCollapsed]="isSidebarCollapsed"
+            (sidebarToggle)="onSidebarToggle()"
+          ></app-sidebar>
+      
+          <button
+            class="sidebar-toggle-btn"
+            [ngClass]="{ 'sidebar-collapsed': isSidebarCollapsed }"
+            (click)="onSidebarToggle()"
+          >
+            <svg
+              *ngIf="isSidebarCollapsed"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="white"
+              stroke="white"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M9 18l6-6-6-6v12z" />
+            </svg>
+            <svg
+              *ngIf="!isSidebarCollapsed"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="white"
+              stroke="white"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M15 6l-6 6 6 6V6z" />
+            </svg>
+          </button>
+     </div>
+     <main class="content" [ngClass]="{ 'content-expanded': isSidebarCollapsed }">
+      <div class="container ">
+        <h1>Consultation des plannings</h1>
+      
+        <div class="buttons">
+          <button
+            *ngFor="let key of (typesPlanning | keyvalue)"
+            (click)="selectionnerPlanning(key.key)"
+            [class.active]="planningSelectionne === key.key"
+          >
+            {{ key.value }}
+          </button>
+        </div>
+      
+        <h2>{{ nomPlanningSelectionne }}</h2>
+      
+        <!-- Vérification pour le planning des examens -->
+        <div *ngIf="planningSelectionne === 'exams' && !examPlanningAvailable">
+          <p class="no-planning">Le planning des examens n'est pas encore disponible.</p>
+        </div>
+      
+        <ul class="file-list">
+          <li *ngFor="let fichier of fichiersPlanning[planningSelectionne]">
+            <div class="file-preview-wrapper">
+              <img [src]="fichier.url" alt="Aperçu du planning" class="file-preview-img" />
+              
+              <!-- Vérification si le fichier est disponible avant d'afficher les icônes -->
+              <div *ngIf="fichier.url && planningSelectionne !== 'exams'" class="overlay-icons">
+                <a [href]="fichier.url" target="_blank" title="Voir">
+                  <img src="view.png" alt="Voir" />
+                </a>
+                <a [href]="fichier.url" download title="Télécharger">
+                  <img src="download.webp" alt="Télécharger" />
+                </a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+     </main>
+     
+</div>
+<app-messagerie></app-messagerie>

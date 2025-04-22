@@ -19,7 +19,11 @@ interface MenuItem {
 export class SidebarComponent {
   @Input() isSidebarCollapsed = false;
   @Output() sidebarToggle = new EventEmitter<void>();
-
+// Gestion de la sous-liste "Marquer absences"
+showAbsenceSubMenu = false; // Afficher/masquer la sous-liste
+selectedClass: string | null = null; // Classe sélectionnée
+showAbsenceModal = false; // Afficher/masquer la fenêtre modale des absences
+students: string[] = []; // Liste des élèves de la classe sélectionnée
   menuItems: MenuItem[];
 
   // User object with dynamic name and profile picture
@@ -82,7 +86,26 @@ export class SidebarComponent {
     ];
   }
 
-  
+    // Sélectionner une classe
+    selectClass(className: string) {
+      this.selectedClass = className;
+      this.showAbsenceModal = true; // Afficher la fenêtre modale
+      this.loadStudents(className); // Charger la liste des élèves
+    }
+    // Charger la liste des élèves (simulée)
+    loadStudents(className: string) {
+      // Exemple de données simulées
+      if (className === 'glsi2a') {
+        this.students = ['Élève 1', 'Élève 2', 'Élève 3'];
+      } else if (className === 'glsi2b') {
+        this.students = ['Élève 4', 'Élève 5', 'Élève 6'];
+      } else if (className === 'glsi2c') {
+        this.students = ['Élève 7', 'Élève 8', 'Élève 9'];
+      }
+    }
+    toggleAbsenceSubMenu() {
+      this.showAbsenceSubMenu = !this.showAbsenceSubMenu;
+    }
 
   sanitizeSvg(svg: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(svg);

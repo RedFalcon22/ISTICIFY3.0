@@ -1,5 +1,5 @@
 <div class="app-container">
-  <div class="position-relative">
+  <div class="position-fixed">
     <app-sidebar
       [isSidebarCollapsed]="isSidebarCollapsed"
       (sidebarToggle)="onSidebarToggle()"
@@ -50,6 +50,7 @@
 
       <div class="col right">
         <app-right-sidebar></app-right-sidebar>
+        <app-messagerie></app-messagerie>
       </div>
     </div>
   </main>

@@ -1,0 +1,246 @@
+/* Fenêtre de chat */
+.chat-window {
+    position: fixed;
+    bottom: 20px;
+    right: 150px; /* Ajustez cette valeur pour éloigner la fenêtre de l'icône */
+    width: 350px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* En-tête de la fenêtre de chat */
+  .chat-header {
+    background-color: #1877F2; /* Bleu */
+    color: white;
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Onglets */
+  .chat-tabs {
+    display: flex;
+    background-color: #f1f1f1;
+    padding: 5px;
+  }
+  
+  .tab-button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: bold;
+    color: #1877F2; /* Bleu */
+  }
+  
+  .tab-button.active {
+    background-color: #1877F2; /* Bleu */
+    color: white;
+    border-radius: 5px;
+  }
+  
+  /* Contenu des onglets */
+  .tab-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+  
+  /* Conteneur des messages */
+.message-container {
+  flex: 1;
+  overflow-y: auto; /* Activer le défilement vertical */
+  max-height: 300px; /* Hauteur fixe pour le conteneur */
+  margin-bottom: 10px;
+  border: 1px solid #ccc; /* Optionnel : pour visualiser le conteneur */
+  border-radius: 5px;
+  padding: 10px;
+}
+
+/* Styles pour les messages */
+.message {
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 5px;
+  max-width: 80%;
+}
+
+.message.student-message {
+  background-color: #e1f5fe; /* Bleu clair pour les messages de l'étudiant */
+  align-self: flex-start;
+}
+
+.message.professor-message {
+  background-color: #f1f1f1; /* Gris pour les messages du professeur */
+  align-self: flex-end;
+}
+
+.timestamp {
+  display: block;
+  font-size: 0.8em;
+  color: #666;
+  margin-top: 5px;
+}
+  
+  /* Formulaire de chat */
+  .chat-form {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .chat-form textarea {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+  }
+  
+  .send-button {
+    background-color: #1877F2; /* Bleu */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+  }
+  
+  .send-button:hover {
+    background-color: #145cb3; /* Bleu foncé */
+  }
+  
+  /* Confirmation d'envoi */
+  .confirmation-message {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #e8f5e9; /* Vert clair */
+    border-radius: 5px;
+    color: #2e7d32; /* Vert foncé */
+    text-align: center;
+  }
+  
+  /* Icône flottante */
+  .floating-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #1877F2; /* Bleu */
+    color: white;
+    padding: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1001;
+  }
+/* Fenêtre modale */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1002; /* Au-dessus de tout */
+  }
+  
+  .modal-content {
+    background-color: white;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal-header {
+    background-color: #1877F2; /* Bleu */
+    color: white;
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .modal-body {
+    padding: 10px;
+  }
+  
+  .modal-footer {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    text-align: right;
+  }
+  /* Styles pour le menu latéral (offcanvas) */
+.offcanvas-start {
+  width: 300px; /* Largeur du menu */
+}
+
+/* En-tête du menu latéral */
+.offcanvas-header {
+  padding: 20px;
+  background-color: #1877F2; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+}
+
+/* Titre du menu latéral */
+.offcanvas-title {
+  font-size: 1.5rem; /* Taille de la police */
+  font-weight: bold; /* Gras */
+}
+
+/* Corps du menu latéral */
+.offcanvas-body {
+  padding: 20px;
+}
+
+/* Styles pour les éléments de la liste */
+.list-group-item {
+  font-size: 1.2rem; /* Taille de la police */
+  padding: 15px 20px; /* Espacement interne */
+  border: none; /* Supprimer la bordure */
+  margin-bottom: 10px; /* Espacement entre les éléments */
+  background-color: #f8f9fa; /* Couleur de fond */
+  border-radius: 8px; /* Coins arrondis */
+  cursor: pointer; /* Curseur en forme de main */
+  transition: background-color 0.3s ease; /* Animation de transition */
+}
+
+/* Effet au survol des éléments de la liste */
+.list-group-item:hover {
+  background-color: #e9ecef; /* Couleur de fond au survol */
+}
+
+/* Styles pour la sous-liste des classes */
+.list-group .list-group {
+  margin-top: 10px;
+}
+
+/* Styles pour les éléments de la sous-liste */
+.list-group .list-group .list-group-item {
+  font-size: 1.1rem; /* Taille de la police */
+  padding: 10px 15px; /* Espacement interne */
+  background-color: #e9ecef; /* Couleur de fond */
+}
+/* Styles pour les icônes dans le menu latéral */
+.list-group-item i {
+  font-size: 1.2rem; /* Taille des icônes */
+  vertical-align: middle; /* Alignement vertical */
+}
+
+/* Espacement entre les icônes et le texte */
+.list-group-item span {
+  vertical-align: middle; /* Alignement vertical */
+}

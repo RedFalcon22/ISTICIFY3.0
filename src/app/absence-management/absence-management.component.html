@@ -1,0 +1,76 @@
+<div class="app-container">
+    <div class="position-fixed">
+        <app-sidebar [isSidebarCollapsed]="isSidebarCollapsed" (sidebarToggle)="onSidebarToggle()"></app-sidebar>
+
+        <button class="sidebar-toggle-btn" [ngClass]="{ 'sidebar-collapsed': isSidebarCollapsed }"
+            (click)="onSidebarToggle()">
+            <svg *ngIf="isSidebarCollapsed" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6v12z" />
+            </svg>
+            <svg *ngIf="!isSidebarCollapsed" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M15 6l-6 6 6 6V6z" />
+            </svg>
+        </button>
+    </div>
+    <main class="content" [ngClass]="{ 'content-expanded': isSidebarCollapsed }">
+        <div class="absence-container">
+            <h1>Gestion des absences</h1>
+            <div class="date-display">{{ currentDate }}</div>
+
+            <div class="search-container">
+                <input type="text" placeholder="Rechercher des classes ou des étudiants..." [formControl]="searchControl">
+            </div>
+
+            <div class="management-area">
+                <div class="class-list">
+                    <h2>Vos classes</h2>
+                    <ul>
+                        <li *ngFor="let cls of filteredClasses" [class.active]="selectedClass?.id === cls.id"
+                            (click)="selectClass(cls)">
+                            {{ cls.name }} ({{ cls.students.length }} étudiants)
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="student-attendance" *ngIf="selectedClass">
+                    <div class="class-header">
+                        <h2>{{ getSelectedClassName() }}</h2>
+                        <div class="action-buttons">
+                            <button (click)="toggleAllPresent()">Basculer tout</button>
+                            <button (click)="saveAbsences()" class="save-btn">Enregistrer les absences</button>
+                        </div>
+                    </div>
+
+                    <div class="attendance-list">
+                        <div class="student-row header">
+                            <div class="student-name">Nom de l'étudiant</div>
+                            <div class="attendance-status">Statut</div>
+                        </div>
+
+                        <div class="student-row" *ngFor="let student of filteredStudents; let i = index">
+                            <div class="student-name">{{ student.name }}</div>
+                            <div class="attendance-status">
+                                <label class="switch">
+                                    <input type="checkbox" [formControl]="getStudentControl(i)">
+                                    <span class="slider round"></span>
+                                </label>
+                                <span class="status-text">
+                                    {{ getStudentControl(i).value ? 'Présent' : 'Absent' }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="no-class-selected" *ngIf="!selectedClass">
+                    <p>Veuillez sélectionner une classe pour gérer les absences</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<app-messagerie></app-messagerie>

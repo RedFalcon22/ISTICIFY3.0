@@ -1,161 +1,164 @@
 <div class="app-container">
-  <div class="sidebar-container">
-    <app-sidebar
-      [isSidebarCollapsed]="isSidebarCollapsed"
-      (sidebarToggle)="onSidebarToggle()"
-    ></app-sidebar>
-
-    <button
-      class="sidebar-toggle-btn"
-      [ngClass]="{ 'sidebar-collapsed': isSidebarCollapsed }"
-      (click)="onSidebarToggle()"
-    >
-      <svg
-        *ngIf="isSidebarCollapsed"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="white"
-        stroke="white"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+  <div class="row">
+    <div class="sidebar-container col-4 position-fixed">
+      <app-sidebar
+        [isSidebarCollapsed]="isSidebarCollapsed"
+        (sidebarToggle)="onSidebarToggle()"
+      ></app-sidebar>
+  
+      <button
+        class="sidebar-toggle-btn"
+        [ngClass]="{ 'sidebar-collapsed': isSidebarCollapsed }"
+        (click)="onSidebarToggle()"
       >
-        <path d="M9 18l6-6-6-6v12z" />
-      </svg>
-      <svg
-        *ngIf="!isSidebarCollapsed"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="white"
-        stroke="white"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="M15 6l-6 6 6 6V6z" />
-      </svg>
-    </button>
-  </div>
-
-  <main class="content" [ngClass]="{ 'content-expanded': isSidebarCollapsed }">
-    <div class="filter-section mb-3">
-      <label for="filterSelect" class="form-label fw-bold">Filter by:</label>
-      <select
-        id="filterSelect"
-        class="form-select w-auto d-inline-block ms-2"
-        (change)="applyFilter($event)"
-      >
-        <option value="">-- Select Filter --</option>
-        <option value="dateAsc">Date (Earliest to Latest)</option>
-        <option value="dateDesc">Date (Latest to Earliest)</option>
-        <option value="titleAsc">Title (A–Z)</option>
-        <option value="titleDesc">Title (Z–A)</option>
-        <option value="filesAsc">Files (Fewest to Most)</option>
-        <option value="filesDesc">Files (Most to Fewest)</option>
-        <option value="lessonType">Lesson Type</option>
-      </select>
+        <svg
+          *ngIf="isSidebarCollapsed"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="white"
+          stroke="white"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M9 18l6-6-6-6v12z" />
+        </svg>
+        <svg
+          *ngIf="!isSidebarCollapsed"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="white"
+          stroke="white"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M15 6l-6 6 6 6V6z" />
+        </svg>
+      </button>
     </div>
-
-    <button
-      class="btn btn-success mt-3"
-      (click)="showAddForm()"
-      *ngIf="!showForm"
-    >
-      + Add Lesson
-    </button>
-
-    <div *ngIf="showForm" class="lesson-form mt-4">
-      <h4>{{ isEditing ? "Edit Lesson" : "Add Lesson" }}</h4>
-      <form (ngSubmit)="onSubmit()">
-        <input
-          type="text"
-          [(ngModel)]="formModel.title"
-          name="title"
-          required
-          placeholder="Lesson Title"
-          class="form-control mb-2"
-        />
-
+  
+    <main class="content col-8" [ngClass]="{ 'content-expanded': isSidebarCollapsed }">
+      <div class="filter-section mb-3 ">
+        <label for="filterSelect" class="form-label fw-bold">Filter by:</label>
         <select
-          [(ngModel)]="formModel.lessonType"
-          name="lessonType"
-          required
-          class="form-control mb-2"
+          id="filterSelect"
+          class="form-select w-auto d-inline-block ms-2"
+          (change)="applyFilter($event)"
         >
-          <option value="">Select Lesson Type</option>
-          <option *ngFor="let type of lessonTypes" [value]="type">
-            {{ type }}
-          </option>
+          <option value="">-- Select Filter --</option>
+          <option value="dateAsc">Date (Earliest to Latest)</option>
+          <option value="dateDesc">Date (Latest to Earliest)</option>
+          <option value="titleAsc">Title (A–Z)</option>
+          <option value="titleDesc">Title (Z–A)</option>
+          <option value="filesAsc">Files (Fewest to Most)</option>
+          <option value="filesDesc">Files (Most to Fewest)</option>
+          <option value="lessonType">Lesson Type</option>
         </select>
-
-        <input
-          type="file"
-          (change)="onFileSelected($event)"
-          multiple
-          class="form-control mb-2"
-          required
-        />
-
-        <div *ngIf="selectedFileNames.length > 0" class="mb-2">
-          <strong>Selected Files:</strong>
-          <ul>
-            <li *ngFor="let name of selectedFileNames">{{ name }}</li>
-          </ul>
-        </div>
-
-        <label for="lessonDate" class="form-label">Lesson Date</label>
-        <input
-          type="datetime-local"
-          [(ngModel)]="formModel.uploadDate"
-          name="date"
-          required
-          class="form-control mb-2"
-        />
-
-        <button
-          type="submit"
-          class="btn btn-primary"
-          [disabled]="!isFormValid()"
-        >
-          {{ isEditing ? "Update Lesson" : "Add Lesson" }}
-        </button>
-        <button type="button" class="btn btn-secondary" (click)="cancelEdit()">
-          Cancel
-        </button>
-      </form>
-    </div>
-
-    <div class="lesson-list mt-4">
-      <div class="lesson-card" *ngFor="let lesson of filteredLessons()">
-        <h5>{{ lesson.title }}</h5>
-        <p><strong>Type:</strong> {{ lesson.lessonType }}</p>
-        <p>
-          <strong>Date:</strong>
-          {{ lesson.uploadDate | date : "EEE MMM dd yyyy HH:mm:ss" }}
-        </p>
-
-        <div *ngIf="lesson.files && lesson.files.length > 0">
-          <strong>Files:</strong>
-          <ul>
-            <li *ngFor="let file of lesson.files">
-              <a [href]="'/path/to/files/' + file" target="_blank">{{
-                file
-              }}</a>
-            </li>
-          </ul>
-        </div>
-
-        <button (click)="editLesson(lesson)" class="btn btn-warning btn-sm">
-          Edit
-        </button>
-        <button (click)="deleteLesson(lesson.id)" class="btn btn-danger btn-sm">
-          Delete
-        </button>
       </div>
-    </div>
-  </main>
+  
+      <button
+        class="btn btn-success mt-3"
+        (click)="showAddForm()"
+        *ngIf="!showForm"
+      >
+        + Add Lesson
+      </button>
+  
+      <div *ngIf="showForm" class="lesson-form mt-4 ">
+        <h4>{{ isEditing ? "Edit Lesson" : "Add Lesson" }}</h4>
+        <form (ngSubmit)="onSubmit()">
+          <input
+            type="text"
+            [(ngModel)]="formModel.title"
+            name="title"
+            required
+            placeholder="Lesson Title"
+            class="form-control mb-2"
+          />
+  
+          <select
+            [(ngModel)]="formModel.lessonType"
+            name="lessonType"
+            required
+            class="form-control mb-2"
+          >
+            <option value="">Select Lesson Type</option>
+            <option *ngFor="let type of lessonTypes" [value]="type">
+              {{ type }}
+            </option>
+          </select>
+  
+          <input
+            type="file"
+            (change)="onFileSelected($event)"
+            multiple
+            class="form-control mb-2"
+            required
+          />
+  
+          <div *ngIf="selectedFileNames.length > 0" class="mb-2">
+            <strong>Selected Files:</strong>
+            <ul>
+              <li *ngFor="let name of selectedFileNames">{{ name }}</li>
+            </ul>
+          </div>
+  
+          <label for="lessonDate" class="form-label">Lesson Date</label>
+          <input
+            type="datetime-local"
+            [(ngModel)]="formModel.uploadDate"
+            name="date"
+            required
+            class="form-control mb-2"
+          />
+  
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!isFormValid()"
+          >
+            {{ isEditing ? "Update Lesson" : "Add Lesson" }}
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="cancelEdit()">
+            Cancel
+          </button>
+        </form>
+      </div>
+  
+      <div class="lesson-list mt-4 ">
+        <div class="lesson-card" *ngFor="let lesson of filteredLessons()">
+          <h5>{{ lesson.title }}</h5>
+          <p><strong>Type:</strong> {{ lesson.lessonType }}</p>
+          <p>
+            <strong>Date:</strong>
+            {{ lesson.uploadDate | date : "EEE MMM dd yyyy HH:mm:ss" }}
+          </p>
+  
+          <div *ngIf="lesson.files && lesson.files.length > 0">
+            <strong>Files:</strong>
+            <ul>
+              <li *ngFor="let file of lesson.files">
+                <a [href]="'/path/to/files/' + file" target="_blank">{{
+                  file
+                }}</a>
+              </li>
+            </ul>
+          </div>
+  
+          <button (click)="editLesson(lesson)" class="btn btn-warning btn-sm">
+            Edit
+          </button>
+          <button (click)="deleteLesson(lesson.id)" class="btn btn-danger btn-sm">
+            Delete
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
 </div>
+<app-messagerie></app-messagerie>

@@ -1,0 +1,76 @@
+<!-- Icône Flottante pour la messagerie -->
+<div class="floating-icon" (click)="toggleChatWindow()">
+    <i class="bi bi-chat-dots"></i> <!-- Icône de discussion (Bootstrap Icons) -->
+  </div>
+  
+  <!-- Fenêtre de Communication -->
+  <div *ngIf="showChatWindow" class="chat-window">
+    <!-- En-tête de la fenêtre de chat -->
+    <div class="chat-header">
+      <h5>Messagerie</h5>
+      <button type="button" class="btn-close" (click)="toggleChatWindow()" aria-label="Close"></button>
+    </div>
+  
+    <!-- Onglets -->
+    <div class="chat-tabs">
+      <button
+        class="tab-button"
+        [class.active]="activeTab === 'student'"
+        (click)="switchTab('student')"
+      >
+        Chat Étudiant
+      </button>
+      <button
+        class="tab-button"
+        [class.active]="activeTab === 'admin'"
+        (click)="switchTab('admin')"
+      >
+        Chat Admin
+      </button>
+    </div>
+  
+    <!-- Contenu des onglets -->
+    <div class="chat-body">
+      <!-- Onglet Chat Étudiant -->
+      <div *ngIf="activeTab === 'student'" class="tab-content">
+        <!-- Conteneur des messages avec défilement -->
+        <div #messageContainer class="message-container">
+          <!-- Afficher les messages -->
+          <div *ngFor="let message of studentMessages" class="message" [class.student-message]="!message.isUser" [class.professor-message]="message.isUser">
+            <p>{{ message.text }}</p>
+            <span class="timestamp">{{ message.timestamp | date: 'HH:mm' }}</span>
+          </div>
+        </div>
+        <!-- Formulaire pour envoyer un message -->
+        <form class="chat-form" (ngSubmit)="sendStudentMessage()">
+          <textarea
+            placeholder="Écrivez un message..."
+            [(ngModel)]="studentMessageInput"
+            name="studentMessageInput"
+            required
+          ></textarea>
+          <button type="submit" class="send-button">
+            <i class="bi bi-send"></i> <!-- Icône d'envoi -->
+          </button>
+        </form>
+      </div>
+  
+      <!-- Onglet Chat Admin -->
+      <div *ngIf="activeTab === 'admin'" class="tab-content">
+        <form class="chat-form" (ngSubmit)="sendAdminMessage()">
+          <textarea
+            placeholder="Composez votre message pour l'administrateur..."
+            [(ngModel)]="adminMessage"
+            name="adminMessage"
+            required
+          ></textarea>
+          <button type="submit" class="send-button">
+            <i class="bi bi-send"></i> <!-- Icône d'envoi -->
+          </button>
+        </form>
+        <div *ngIf="messageSent" class="confirmation-message">
+          Votre message a été envoyé à l'administrateur par e-mail.
+        </div>
+      </div>
+    </div>
+  </div>

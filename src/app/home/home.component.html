@@ -1,0 +1,160 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1877F2;">
+  <div class="container-fluid">
+    <!-- Menu Hamburger -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Nom du site (CENTRÉ) -->
+    <a class="navbar-brand mx-auto fw-bold text-warning">ISTIC</a>
+
+    <!-- Liens à droite (optionnel) -->
+    <div class="d-flex">
+      <a class="nav-link text-white me-5" href="#">Accueil</a>
+      <a class="nav-link text-white me-5" href="#">À propos</a>
+      <a class="nav-link text-white" href="#">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Menu Latéral Offcanvas -->
+<!-- Menu Latéral Offcanvas -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="sidebarMenuLabel">Menu</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="list-group">
+      <!-- Profil avec icône -->
+      <li class="list-group-item">
+        <i class="bi bi-person me-2"></i> <!-- Icône de profil -->
+        <span class="text-decoration-none">Profil</span>
+      </li>
+
+      <!-- Matière avec icône -->
+      <li class="list-group-item">
+        <i class="bi bi-book me-2"></i> <!-- Icône de livre -->
+        <span class="text-decoration-none">Matière</span>
+      </li>
+
+      <!-- Planning avec icône -->
+      <li class="list-group-item">
+        <i class="bi bi-calendar me-2"></i> <!-- Icône de calendrier -->
+        <span class="text-decoration-none">Planning</span>
+      </li>
+
+      <!-- Marquer absences avec icône -->
+      <li class="list-group-item">
+        <i class="bi bi-check-circle me-2"></i> <!-- Icône de check -->
+        <span class="text-decoration-none" (click)="toggleAbsenceSubMenu()">Marquer absences</span>
+        <!-- Sous-liste des classes -->
+        <ul *ngIf="showAbsenceSubMenu" class="list-group mt-2">
+          <li class="list-group-item" (click)="selectClass('glsi2a')">glsi2a</li>
+          <li class="list-group-item" (click)="selectClass('glsi2b')">glsi2b</li>
+          <li class="list-group-item" (click)="selectClass('glsi2c')">glsi2c</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- Icône Flottante pour la messagerie -->
+<div class="floating-icon" (click)="toggleChatWindow()">
+  <i class="bi bi-chat-dots"></i> <!-- Icône de discussion (Bootstrap Icons) -->
+</div>
+
+<!-- Fenêtre de Communication -->
+<div *ngIf="showChatWindow" class="chat-window">
+  <!-- En-tête de la fenêtre de chat -->
+  <div class="chat-header">
+    <h5>Communiquer</h5>
+    <button type="button" class="btn-close" (click)="toggleChatWindow()" aria-label="Close"></button>
+  </div>
+
+  <!-- Onglets -->
+  <div class="chat-tabs">
+    <button
+      class="tab-button"
+      [class.active]="activeTab === 'student'"
+      (click)="switchTab('student')"
+    >
+      Chat Étudiant
+    </button>
+    <button
+      class="tab-button"
+      [class.active]="activeTab === 'admin'"
+      (click)="switchTab('admin')"
+    >
+      Chat Admin
+    </button>
+  </div>
+
+  <!-- Contenu des onglets -->
+  <div class="chat-body">
+    <!-- Onglet Chat Étudiant -->
+    <div *ngIf="activeTab === 'student'" class="tab-content">
+      <!-- Conteneur des messages avec défilement -->
+      <div #messageContainer class="message-container">
+        <!-- Afficher les messages -->
+        <div *ngFor="let message of studentMessages" class="message" [class.student-message]="!message.isUser" [class.professor-message]="message.isUser">
+          <p>{{ message.text }}</p>
+          <span class="timestamp">{{ message.timestamp | date: 'HH:mm' }}</span>
+        </div>
+      </div>
+      <!-- Formulaire pour envoyer un message -->
+      <form class="chat-form" (ngSubmit)="sendStudentMessage()">
+        <textarea
+          placeholder="Écrivez un message..."
+          [(ngModel)]="studentMessageInput"
+          name="studentMessageInput"
+          required
+        ></textarea>
+        <button type="submit" class="send-button">
+          <i class="bi bi-send"></i> <!-- Icône d'envoi -->
+        </button>
+      </form>
+    </div>
+
+    <!-- Onglet Chat Admin -->
+    <div *ngIf="activeTab === 'admin'" class="tab-content">
+      <form class="chat-form" (ngSubmit)="sendAdminMessage()">
+        <textarea
+          placeholder="Composez votre message pour l'administrateur..."
+          [(ngModel)]="adminMessage"
+          name="adminMessage"
+          required
+        ></textarea>
+        <button type="submit" class="send-button">
+          <i class="bi bi-send"></i> <!-- Icône d'envoi -->
+        </button>
+      </form>
+      <div *ngIf="messageSent" class="confirmation-message">
+        Votre message a été envoyé à l'administrateur par e-mail.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Fenêtre modale pour marquer les absences -->
+<div *ngIf="showAbsenceModal" class="modal-backdrop">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5>Marquer les absences - {{ selectedClass }}</h5>
+      <button type="button" class="btn-close" (click)="showAbsenceModal = false" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <ul class="list-group">
+        <li *ngFor="let student of students" class="list-group-item d-flex justify-content-between align-items-center">
+          {{ student }}
+          <button class="btn btn-danger btn-sm" (click)="markAbsent(student)">Absent</button>
+        </li>
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="showAbsenceModal = false">confirmer</button>
+    </div>
+  </div>
+</div>

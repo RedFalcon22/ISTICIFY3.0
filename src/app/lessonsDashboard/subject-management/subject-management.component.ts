@@ -1,16 +1,18 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, NgModule } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';  // Import CommonModule
+import { Subscription } from 'rxjs';
 import { LessonService } from '../../services/lesson.service';
 import { SidebarComponent } from '../../dashboard/sidebar/sidebar.component';
-import { Subscription } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { MessagerieComponent } from '../../messagerie/messagerie.component';
+
 
 @Component({
   selector: 'app-subject-management',
-  standalone: true,
-  imports: [CommonModule, FormsModule, SidebarComponent],
   templateUrl: './subject-management.component.html',
+  imports:[ CommonModule, SidebarComponent, FormsModule, MessagerieComponent],
+  standalone: true,
   styleUrls: ['./subject-management.component.css'],
 })
 export class SubjectManagementComponent implements OnInit, OnDestroy {
